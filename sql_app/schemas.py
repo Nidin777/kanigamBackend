@@ -3,8 +3,8 @@ from pydantic import BaseModel
 
 
 class JobBase(BaseModel):
-    id: int
-    experience: int
+    id: Optional[int] = None
+    experience: str
     role: str
     jobdescription: str
     skills: str
