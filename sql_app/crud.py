@@ -11,3 +11,9 @@ def create_job(db: Session, job: schemas.JobBase):
     db.refresh(db_job)
     return db_job
 
+def delete_job(jobId: int,db: Session):
+    db_job = db.query(models.Job).filter(models.Job.id == jobId).first()
+    db.delete(db_job)
+    db.commit()
+    db.refresh(db_job)
+    return db_job

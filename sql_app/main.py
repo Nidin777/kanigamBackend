@@ -25,3 +25,9 @@ def read_jobs(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 def create_job_in_db(job: schemas.JobBase, db: Session = Depends(get_db)):  
     print(job)  
     return crud.create_job(db=db, job=job)
+
+@app.delete("/deletejob/{job_id}", response_model=schemas.JobBase)
+def create_job_in_db(job_id: int, db: Session = Depends(get_db)):  
+    return crud.delete_job(jobId=job_id, db=db)
+
+
