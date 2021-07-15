@@ -10,8 +10,8 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 origins = [
-    "http://localhost",
-    "http://localhost:8080",
+    # "http://localhost:8080/",
+    # "http://192.168.43.57:8080/",
 ]
 
 app.add_middleware(
@@ -40,8 +40,13 @@ def create_job_in_db(job: schemas.JobBase, db: Session = Depends(get_db)):
     print(job)  
     return crud.create_job(db=db, job=job)
 
-@app.delete("/deletejob/{job_id}", response_model=schemas.JobBase)
-def create_job_in_db(job_id: int, db: Session = Depends(get_db)):  
-    return crud.delete_job(jobId=job_id, db=db)
+@app.get("/job/{job_id}", response_model=schemas.JobBase)
+def get_job_in_db(job_id: int, db: Session = Depends(get_db)):  
+    return crud.get_job_by_id( jobId=job_id, db=db)
+
+@app.delete("/job/{job_id}", response_model=schemas.JobBase)
+def delete_job_in_db(job_id: int, db: Session = Depends(get_db)):  
+    return crud.delete_job( jobId=job_id, db=db)
+
 
 

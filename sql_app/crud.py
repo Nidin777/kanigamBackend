@@ -17,3 +17,7 @@ def delete_job(jobId: int,db: Session):
     db.commit()
     db.refresh(db_job)
     return db_job
+
+def get_job_by_id(jobId: int,db: Session):
+    db_job = db.query(models.Job).filter(models.Job.id == jobId).first()
+    return db_job
